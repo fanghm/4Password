@@ -1,0 +1,35 @@
+<form bindsubmit="formSubmit" bindreset="formReset">
+    <view class="flex-column">
+        <view class="flex-row">
+            <input class="flex-item" name="app" placeholder="APP, 网站，邮箱等" placeholder-style="color:gray" value="{{def_value}}"> </input>
+            <label class="flex-item">
+              <switch name="stay_top" type="checkbox" style="margin-left:5px;" checked="{{stay_top}}"/>
+              <Text style="padding-left:5px;">置顶</Text>
+            </label>
+        </view>
+        <view class="flex-row">
+            <input class="flex-item input-account" name="account" placeholder="账号" placeholder-style="color:gray" value="{{def_value}}"> </input>
+            <label class="flex-item">
+              <switch name="use_phone" type="checkbox" style="margin-left:5px;" checked="{{use_phone}}"/>
+              <Text style="padding-left:5px;">手机号</Text>
+            </label>
+        </view>
+        
+        <view class="flex-row">
+            <input class="flex-item input-pwd" name="password" password="{{hide_pwd}}" placeholder="密码" placeholder-style="color:gray" value="{{def_value}}"/>
+            <image class="flex-item view-pwd" style="margin-left:10px;width:25px;height:25px;" mode="aspectFit" bindtap="bindViewPwd" src="{{view_pwd_img}}"></image>
+        </view>
+        
+        <view class="flex-row">
+          <textarea name="comment" style="margin-left:10px;"  auto-height placeholder="备注" value="{{def_value}}"/>
+        </view>
+        
+        <view class="flex-row">
+          <button formType="submit" style="width:100%;height:70rpx;border:none">保存</button>
+        </view>
+        
+        <view class="flex-row">
+          <button formType="reset" style="width:100%;height:70rpx;">重置</button>
+        </view>
+    </view>
+</form>

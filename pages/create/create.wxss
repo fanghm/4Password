@@ -1,0 +1,28 @@
+/* pages/create/create.wxss */
+.flex-column {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    /* background: #8e569e; */
+}
+.flex-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 10rpx;
+    height: 80rpx;
+    border-bottom: 3rpx solid rgb(233, 233, 233);
+    /* background: deepskyblue; */
+}
+.flex-row input {
+  padding: 5rpx;
+}
+.flex-item {
+    margin-left: 10rpx;
+    margin-right: 10rpx;
+    margin-top: 1rpx;
+    margin-bottom: 1rpx;
+    /* color: snow; 
+    background: tomato;   */
+}
