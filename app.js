@@ -34,6 +34,8 @@ App({
     })
   },
   globalData: {
-    userInfo: null
+    userInfo: null,
+    images: ['../../images/hide_pwd.png', '../../images/show_pwd.png'],
+    storageKey: '4Pwd'
   }
 })

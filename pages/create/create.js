@@ -1,4 +1,5 @@
 // pages/create/create.js
+const app = getApp();
 Page({
 
   /**
@@ -6,11 +7,12 @@ Page({
    */
   data: {
     accounts: [],
-    def_value: '',
+    def_value: '',  // for form reseting
     stay_top: false,
     use_phone: false,
     hide_pwd: false,
-    view_pwd_img: '../../images/hide_pwd.png'
+    pwd_focus: false,
+    view_pwd_img: app.globalData.images[0]
   },
   formSubmit: function (e) {
     console.log('Submiting form with data: ', e.detail.value);
@@ -22,41 +24,35 @@ Page({
       stay_top: false,
       use_phone: false,
     });
+
     wx.showToast({
       title: '保存成功',
     });
     // console.log('bindViewPwd: ' + JSON.stringify(this.data.accounts));
   },
   formReset: function () {
-    // this.initView();
   },
   bindViewPwd: function () {
-    this.data.hide_pwd = !this.data.hide_pwd;
-    if (!this.data.hide_pwd) {
-      this.data.view_pwd_img = "../../images/hide_pwd.png";
-    } else {
-      this.data.view_pwd_img = "../../images/show_pwd.png";
-    }
-
     this.setData({
-      hide_pwd: this.data.hide_pwd,
-      view_pwd_img: this.data.view_pwd_img
-    });
-  },
-  initView: function () {
-    this.setData({
-      def_value: '',
-      stay_top: false,
-      use_phone: false,
-      hide_pwd: false,
-      view_pwd_img: '../../images/hide_pwd.png'
+      hide_pwd: !this.data.hide_pwd,
+      view_pwd_img: app.globalData.images[ (!this.data.hide_pwd) | 0],
+      pwd_focus: true // mandatory!
     });
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    // TODO: load data from storage
+    let that = this;
+    wx.getStorage({
+      key: app.globalData.storageKey,
+      success: function (res) {
+        if (res.data)
+          that.setData({ accounts: res.data });
+
+        console.log('Load stored data: ' + JSON.stringify(res.data));
+      }
+    });
   },
 
   /**
@@ -70,21 +66,26 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+    // 每次打开页面都会调用一次
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-  
+    console.log('onUnload, saving to storage');
+    try {
+      wx.setStorageSync(app.globalData.storageKey, this.data.accounts);
+    } catch (e) {
+      console.log(e);
+    }
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-  
+
   },
 
   /**
